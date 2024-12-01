@@ -20,6 +20,7 @@ class Settlement {
         const string toString() const;
 
         private:
+            const string test;
             const string name;
             SettlementType type;
 };
