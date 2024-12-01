@@ -44,3 +44,16 @@ void Facility::setStatus(FacilityStatus status){
 FacilityStatus Facility::step(){
     this->timeLeft --;
 }
+const string Facility::toString() const{
+    return "FacilityName: "+ this->getName() +"\n"+ "FacilityStatus: "+ getStatusString();
+}
+const string Facility::getStatusString() const{
+    switch(status){
+        case FacilityStatus::OPERATIONAL:
+            return "OPERATIONAL";
+    
+        case FacilityStatus::UNDER_CONSTRUCTIONS:
+            return "UNDER_CONSTRUCTIONS";
+        }
+    }
+
