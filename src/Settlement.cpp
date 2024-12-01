@@ -1,6 +1,8 @@
-#include "Settlement.h"
+#include "../include/Settlement.h"
 using std::string;
 #include <string>
+
+Settlement::Settlement(const string &name, SettlementType type): name(name), type(type){};
 const string& Settlement::getName() const{
     return this->name;
 }
