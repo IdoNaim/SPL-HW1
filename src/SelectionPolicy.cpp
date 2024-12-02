@@ -40,8 +40,8 @@ const FacilityType& BalancedSelection::selectFacility(const vector<FacilityType>
         int lifeQuality =this->getLifeQualityScore() + option.getLifeQualityScore();
         int economy = this->getEconomyScore() + option.getEconomyScore();
         int environment = this->getEnvironmentScore() + option.getEconomyScore();
-        int maximum = std::max(lifeQuality,economy,environment);
-        int minimum = std::min(lifeQuality,economy,environment);
+        int maximum = std::max(lifeQuality,std::max(economy,environment));
+        int minimum = std::min(lifeQuality,std::min(economy,environment));
         int distance = maximum - minimum;
         if(distance < minDistance | minDistance==-1){
             minDistance = distance ;
