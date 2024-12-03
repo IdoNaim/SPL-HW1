@@ -29,9 +29,6 @@ class BalancedSelection: public SelectionPolicy {
         const string toString() const override;
         BalancedSelection *clone() const override;
         ~BalancedSelection() override = default;
-        int getLifeQualityScore() const;
-        int getEconomyScore() const;
-        int getEnvironmentScore() const;
     private:
         int LifeQualityScore;
         int EconomyScore;
@@ -46,7 +43,6 @@ class EconomySelection: public SelectionPolicy {
         EconomySelection *clone() const override;
         ~EconomySelection() override = default;
     private:
-        void setIndex(int index);
         int lastSelectedIndex;
 
 };
@@ -59,6 +55,5 @@ class SustainabilitySelection: public SelectionPolicy {
         SustainabilitySelection *clone() const override;
         ~SustainabilitySelection() override = default;
     private:
-        void setIndex(int index);
         int lastSelectedIndex;
 };
