@@ -4,14 +4,14 @@
 using namespace std;
 
 
-Simulation::Simulation(const string &configFilePath){
-    //TODO: finish method
+Simulation::Simulation(const string &configFilePath)
+: isRunning(false), planCounter(0), actionsLog(), plans(), settlements(), facilitiesOptions() {
+    
 }
 
 void Simulation::start(){
     cout<<"The simulation has started"<<endl;
-    isRunning = true;
-//TODO: finish method
+    open();
 }
 
 void Simulation::addPlan(const Settlement &settlement, SelectionPolicy *selectionPolicy){
@@ -79,9 +79,18 @@ Plan & Simulation::getPlan(const int planID){
 }
 
 void Simulation::step(){
-    
+    for(Plan plan : plans){
+        plan.step();
+    }
 }
 
-void Simulation::close();
+void Simulation::close(){
+    for(Plan plan : plans){
+        cout<<plan.toString()<<endl;
+    }
+    this->isRunning= false;
+}
 
-void Simulation::open();
+void Simulation::open(){
+    this->isRunning =true;
+}
