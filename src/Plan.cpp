@@ -84,3 +84,6 @@ using std::vector;
                     return "Not Possible";
             }
 }
+const int Plan::getId() const{
+    return this->plan_id;
+}

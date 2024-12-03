@@ -23,6 +23,7 @@ class Plan {
         void addFacility(Facility* facility);
         const string toString() const;
         const string planStatusToString() const;
+        const int getId() const;
 
     private:
         int plan_id;

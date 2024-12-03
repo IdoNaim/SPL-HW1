@@ -24,6 +24,7 @@ class Simulation {
         void step();
         void close();
         void open();
+        bool isPlanExists(const int planID);
 
     private:
         bool isRunning;
