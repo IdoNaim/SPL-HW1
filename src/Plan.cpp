@@ -26,6 +26,15 @@ using std::vector;
             this->selectionPolicy = selectionPolicy;
         }
         void Plan::step() {
+            if(status == PlanStatus::AVALIABLE){
+                while (underConstruction.size() < static_cast<int>(settlement.getType())) {
+                    Facility* f = new Facility(selectionPolicy->selectFacility(facilityOptions), settlement.getName());
+                    underConstruction.push_back(f);
+                }
+            }
+            status = PlanStatus::BUSY;
+
+
             for (int i = 0; i < underConstruction.size(); i++ ) {
                 Facility* f = underConstruction[i];
                 f->step();
@@ -37,12 +46,8 @@ using std::vector;
                 }
             }
 
-            for(int i = static_cast<int>(settlement.getType()); i > underConstruction.size(); i--){
-                FacilityType type = selectionPolicy->selectFacility(facilityOptions);
-                for()
-            } 
-
-
+            if(underConstruction.size() != static_cast<int>(settlement.getType()))
+                status = PlanStatus::AVALIABLE;
 
         }
 
