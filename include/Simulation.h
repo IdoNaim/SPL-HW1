@@ -38,5 +38,4 @@ class Simulation {
         vector<Plan> plans;
         vector<Settlement*> settlements;
         vector<FacilityType> facilitiesOptions;
-        unordered_map<string, function<void(vector<string>)>> commandMap;
 };

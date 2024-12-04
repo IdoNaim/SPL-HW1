@@ -1,16 +1,14 @@
-//#include "Simulation.h"
+#include "../include/Simulation.h"
 #include "../include/Facility.h"
 #include <iostream>
 
 using namespace std;
 
-//Simulation* backup = nullptr;
+Simulation* backup = nullptr;
 
 int main(int argc, char** argv){
-    FacilityType g("hello", FacilityCategory::ECONOMY, 1,1,1,1);
-    FacilityCategory a = g.getCategory();
-    cout<<"sigma"<<endl;
-    /*if(argc!=2){
+    
+    if(argc!=2){
         cout << "usage: simulation <config_path>" << endl;
         return 0;
     }
@@ -20,6 +18,6 @@ int main(int argc, char** argv){
     if(backup!=nullptr){
     	delete backup;
     	backup = nullptr;
-    }*/
+    }
     return 0;
 }

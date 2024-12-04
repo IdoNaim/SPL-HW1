@@ -1,12 +1,54 @@
 #include "../include/Simulation.h"
 #include "../include/Action.h"
+#include "../include/Auxiliary.h" 
 #include <iostream>
 #include <sstream>
+#include <bits/stdc++.h>
+#include <fstream>
+
 using namespace std;
+
 
 
 Simulation::Simulation(const string &configFilePath)
 : isRunning(false), planCounter(0), actionsLog(), plans(), settlements(), facilitiesOptions() {
+    ifstream config(configFilePath);
+    
+    if (!config.is_open()) {
+        cerr << "Error: Unable to open the file at " << configFilePath << endl;
+    }
+    string line;
+    while(getline(config,line)){
+        vector<string> lineArgs = Auxiliary::parseArguments(line);
+        if(lineArgs.at(0) != "#"){
+            if(lineArgs.at(0) == "settlement"){
+                SettlementType t = static_cast<SettlementType>(stoi(lineArgs.at(2)));
+                this->settlements.push_back( new Settlement(lineArgs.at(1),t));
+            }
+            else if(lineArgs.at(0) == "facility"){
+                FacilityCategory c = static_cast<FacilityCategory>(stoi(lineArgs.at(2)));
+                this->facilitiesOptions.push_back(FacilityType(lineArgs.at(1), c, stoi(lineArgs.at(3)),stoi(lineArgs.at(4)),stoi(lineArgs.at(5)),stoi(lineArgs.at(6))));
+            }
+            else if(lineArgs.at(0) == "plan"){
+                string policy =lineArgs.at(2);
+                SelectionPolicy* s;
+                if(policy == "nve"){
+                    s = new NaiveSelection();
+                }
+                else if(policy == "bal"){
+                    s = new BalancedSelection(0,0,0);
+                }
+                else if(policy == "eco"){
+                    s = new EconomySelection();
+                }
+                else if(policy == "env"){
+                    s = new SustainabilitySelection();
+                }
+                this->plans.push_back(Plan(this->planCounter,getSettlement(lineArgs.at(1)),s,this->facilitiesOptions));
+                this->planCounter++;
+            }
+        }
+    }
 }
 
 void Simulation::start(){
@@ -15,7 +57,7 @@ void Simulation::start(){
     string input;
     while(isRunning){
         getline(cin,input);
-        vector<string>& arguments = split(input);
+        vector<string> arguments = Auxiliary::parseArguments(input);
         int size = arguments.size();
         string& command = arguments.at(0);
         if (command == "step"){
@@ -79,8 +121,8 @@ void Simulation::addPlan(const Settlement &settlement, SelectionPolicy *selectio
     Plan p(this->planCounter,settlement,selectionPolicy,this->facilitiesOptions);
     this->plans.push_back(p);
 
-    AddPlan* a = new AddPlan(settlement.getName(), selectionPolicy->toString());
-    addAction(a);
+  //  AddPlan* a = new AddPlan(settlement.getName(), selectionPolicy->toString());
+ //   addAction(a);
     this->planCounter++;
   //  delete a; 
   //dont know if needed
@@ -154,14 +196,4 @@ void Simulation::close(){
 
 void Simulation::open(){
     this->isRunning =true;
-}
-
-vector<string>& Simulation::split(const string& input) {
-    istringstream iss(input);
-    vector<string> tokens;
-    string token;
-    while (iss >> token) {
-        tokens.push_back(token);
-    }
-    return tokens;
 }

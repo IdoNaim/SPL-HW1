@@ -65,7 +65,8 @@
         "memory": "cpp",
         "memory_resource": "cpp",
         "numeric": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "filesystem": "cpp"
     },
     "terminal.integrated.inheritEnv": false,
 }
