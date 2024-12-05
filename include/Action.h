@@ -109,6 +109,7 @@ class PrintActionsLog : public BaseAction {
         void act(Simulation &simulation) override;
         PrintActionsLog *clone() const override;
         const string toString() const override;
+        const string statusToString(ActionStatus status);
     private:
 };
 

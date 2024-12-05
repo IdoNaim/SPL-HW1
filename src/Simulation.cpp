@@ -120,9 +120,6 @@ void Simulation::start(){
 void Simulation::addPlan(const Settlement &settlement, SelectionPolicy *selectionPolicy){
     Plan p(this->planCounter,settlement,selectionPolicy,this->facilitiesOptions);
     this->plans.push_back(p);
-
-    AddPlan* a = new AddPlan(settlement.getName(), selectionPolicy->toString());
-    addAction(a);
     this->planCounter++;
   //  delete a; 
   //dont know if needed
@@ -269,4 +266,16 @@ void Simulation::clear(){
     settlements.clear();
     plans.clear();
     facilitiesOptions.clear();
+}
+
+const vector<Plan>& Simulation::getPlans() const{
+    return plans;
+}
+
+const vector<FacilityType>& Simulation::getFacilitiesOptions() const{
+    return facilitiesOptions;
+}
+
+const vector<BaseAction*> Simulation::getActionsLog() const{
+    return actionsLog;
 }

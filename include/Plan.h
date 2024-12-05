@@ -25,6 +25,9 @@ class Plan {
         const string planStatusToString() const;
         const int getId() const;
         Plan(const Plan& other);
+        const SelectionPolicy* getSelectionPolicy() const;
+        const Settlement& getSettlement() const;
+
 
     private:
         int plan_id;

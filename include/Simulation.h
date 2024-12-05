@@ -34,6 +34,9 @@ class Simulation {
         ~Simulation();
         Simulation(Simulation&& other);
         Simulation& operator=(Simulation&& other);
+        const vector<Plan>& getPlans() const;
+        const vector<FacilityType>& getFacilitiesOptions() const;
+        const vector<BaseAction*> getActionsLog() const;
 
 
     private:

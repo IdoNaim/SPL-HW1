@@ -97,3 +97,9 @@ plan_id(other.plan_id), settlement(Settlement(other.settlement)), selectionPolic
         this->underConstruction.push_back(f->clone());
     }
 }
+const SelectionPolicy* Plan::getSelectionPolicy() const{
+    return selectionPolicy;
+}
+const Settlement& Plan::getSettlement() const{
+    return settlement;
+}
