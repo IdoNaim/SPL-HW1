@@ -209,9 +209,9 @@ Simulation::~Simulation(){
     plans.clear();
     facilitiesOptions.clear();
 }
-Simulation::Simulation(const Simulation& other){
-    
+Simulation::Simulation(const Simulation& other): isRunning(false), planCounter(0), actionsLog(), plans(), settlements(), facilitiesOptions(){
+
     for(Settlement* s: other.settlements){
-        this
+        this->settlements.push_back(s->clone());
     }
 }
