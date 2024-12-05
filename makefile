@@ -3,7 +3,7 @@
 all:  link
 
 link: compile
-	g++ -o bin/main bin/main.o bin/Facility.o bin/SelectionPolicy.o bin/Settlement.o bin/Simulation.o bin/Auxiliary.o bin/Plan.o bin/Action.o
+	g++ -o bin/simulation bin/main.o bin/Facility.o bin/SelectionPolicy.o bin/Settlement.o bin/Simulation.o bin/Auxiliary.o bin/Plan.o bin/Action.o
 
 compile: clean src/Facility.cpp src/SelectionPolicy.cpp src/Settlement.cpp src/Simulation.cpp src/Auxiliary.cpp src/Plan.cpp src/main.cpp
 	g++ -g -c -Wall -Weffc++ -std=c++11  -o bin/Facility.o src/Facility.cpp

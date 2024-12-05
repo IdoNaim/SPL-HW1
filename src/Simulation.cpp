@@ -44,7 +44,9 @@ Simulation::Simulation(const string &configFilePath)
                 else if(policy == "env"){
                     s = new SustainabilitySelection();
                 }
-                this->plans.push_back(Plan(this->planCounter,getSettlement(lineArgs.at(1)),s,this->facilitiesOptions));
+                Settlement t = getSettlement(lineArgs.at(1));
+                Plan p(this->planCounter,t,s,this->facilitiesOptions);
+                this->plans.push_back(std::move(p));
                 this->planCounter++;
             }
         }
@@ -243,9 +245,8 @@ Simulation& Simulation::operator=(const Simulation& other){
         for(FacilityType f : other.facilitiesOptions){
             this->facilitiesOptions.push_back(FacilityType(f));
         }
-        
-        return *this;
     }
+    return *this;
 }
 Simulation::Simulation(Simulation&& other):
 isRunning(other.isRunning), planCounter(other.planCounter), actionsLog(std::move(other.actionsLog)), plans(std::move(other.plans)), settlements(std::move(other.settlements)), facilitiesOptions(std::move(other.facilitiesOptions)){}
@@ -261,15 +262,20 @@ Simulation & Simulation::operator=(Simulation&& other){
         this->plans = std::move(other.plans);
         this->settlements = std::move(other.settlements);
     }
+    return *this;
 
 }
 void Simulation::clear(){
     for(BaseAction* a : this->actionsLog){
-        delete a;
+        if(a != nullptr){
+            delete a;
+        } 
     }
     actionsLog.clear();
     for(Settlement* s : this->settlements){
-        delete s;
+        if(s != nullptr){
+            delete s;
+        }
     }
     settlements.clear();
     plans.clear();
