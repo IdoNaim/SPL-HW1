@@ -198,16 +198,7 @@ void Simulation::open(){
     this->isRunning =true;
 }
 Simulation::~Simulation(){
-    for(BaseAction* a : this->actionsLog){
-        delete a;
-    }
-    actionsLog.clear();
-    for(Settlement* s : this->settlements){
-        delete s;
-    }
-    settlements.clear();
-    plans.clear();
-    facilitiesOptions.clear();
+    clear();
 }
 Simulation::Simulation(const Simulation& other): isRunning(false), planCounter(0), actionsLog(), plans(), settlements(), facilitiesOptions()
 {
@@ -227,5 +218,55 @@ Simulation::Simulation(const Simulation& other): isRunning(false), planCounter(0
 
 }
 Simulation& Simulation::operator=(const Simulation& other){
+    if(this != &other){
+        this-> isRunning = other.isRunning;
+        this->planCounter = other.planCounter;
+        clear();
+        
+        for(BaseAction* a : other.actionsLog){
+            this->actionsLog.push_back(a->clone());
+        }
+
+        for(Settlement* s : other.settlements){
+            this->settlements.push_back(s->clone());
+        }
+
+        for(Plan p: other.plans){
+            this->plans.push_back(Plan(p));
+        }
+
+        for(FacilityType f : other.facilitiesOptions){
+            this->facilitiesOptions.push_back(FacilityType(f));
+        }
+        
+        return *this;
+    }
+}
+Simulation::Simulation(Simulation&& other):
+isRunning(other.isRunning), planCounter(other.planCounter), actionsLog(std::move(other.actionsLog)), plans(std::move(other.plans)), settlements(std::move(other.settlements)), facilitiesOptions(std::move(other.facilitiesOptions)){}
+
+Simulation & Simulation::operator=(Simulation&& other){
+    if(this != &other){
+        clear();
     
+        this->isRunning = other.isRunning;
+        this->planCounter = other.planCounter;
+        this->actionsLog = std::move(other.actionsLog);
+        this->facilitiesOptions = std::move(other.facilitiesOptions);
+        this->plans = std::move(other.plans);
+        this->settlements = std::move(other.settlements);
+    }
+
+}
+void Simulation::clear(){
+    for(BaseAction* a : this->actionsLog){
+        delete a;
+    }
+    actionsLog.clear();
+    for(Settlement* s : this->settlements){
+        delete s;
+    }
+    settlements.clear();
+    plans.clear();
+    facilitiesOptions.clear();
 }

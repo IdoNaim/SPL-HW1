@@ -34,7 +34,7 @@ class Simulation {
         ~Simulation();
         Simulation(Simulation&& other);
         Simulation& operator=(Simulation&& other);
-        
+
 
     private:
         bool isRunning;
@@ -43,4 +43,5 @@ class Simulation {
         vector<Plan> plans;
         vector<Settlement*> settlements;
         vector<FacilityType> facilitiesOptions;
+        void clear();
 };
