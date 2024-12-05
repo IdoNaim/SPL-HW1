@@ -27,6 +27,7 @@ class Plan {
         Plan(const Plan& other);
         const SelectionPolicy* getSelectionPolicy() const;
         const Settlement& getSettlement() const;
+        const string toStringClose() const;
 
 
     private:

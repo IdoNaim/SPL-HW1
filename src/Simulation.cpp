@@ -64,17 +64,21 @@ void Simulation::start(){
             if(size==2 && isdigit(arguments.at(1).at(0)));
             BaseAction* a = new SimulateStep(stoi(arguments.at(1)));
             a->act(*this);
+            addAction(a);
         }
         else if(command == "planStatus"){
             if(size == 2 && isdigit(arguments.at(1).at(0))){
                 BaseAction* a =  new PrintPlanStatus(stoi(arguments.at(1)));
                 a->act(*this);
+                addAction(a);
+
             }
         }
         else if(command == "plan"){
             if(size == 3){
                 BaseAction* a = new AddPlan(arguments.at(1), arguments.at(2));
                 a->act(*this);
+                addAction(a);
             }
         }
         else if(command == "settlement" && size == 3 && isdigit(arguments.at(2).at(0))){
@@ -84,6 +88,7 @@ void Simulation::start(){
             else{
                 BaseAction* a = new AddSettlement(arguments.at(1), static_cast<SettlementType>(stoi(arguments.at(2))));
                 a->act(*this);
+                addAction(a);
             }
         }
         else if(command == "facility" && size == 7){
@@ -93,27 +98,33 @@ void Simulation::start(){
             else{
                 BaseAction* a = new AddFacility(arguments.at(1), static_cast<FacilityCategory>(stoi(arguments.at(2))), stoi(arguments.at(3)),stoi(arguments.at(4)),stoi(arguments.at(5)),stoi(arguments.at(6)));
                 a->act(*this);
+                addAction(a);
             }
         }
         else if(command == "changePolicy" && size == 3){
             BaseAction* a = new ChangePlanPolicy(stoi(arguments.at(1)), arguments.at(2));
             a->act(*this);
+            addAction(a);
         }
         else if(command == "log"){
             BaseAction* a = new PrintActionsLog();
             a->act(*this);
+            addAction(a);
         }
         else if(command == "close"){
             BaseAction* a = new Close();
             a->act(*this);
+            addAction(a);
         }
         else if(command == "backup"){
             BaseAction* a = new BackupSimulation();
             a->act(*this);
+            addAction(a);
         }
         else if(command == "restore"){
             BaseAction* a = new RestoreSimulation();
             a->act(*this);
+            addAction(a);
         }
     }
 }
@@ -121,9 +132,6 @@ void Simulation::addPlan(const Settlement &settlement, SelectionPolicy *selectio
     Plan p(this->planCounter,settlement,selectionPolicy,this->facilitiesOptions);
     this->plans.push_back(p);
     this->planCounter++;
-  //  delete a; 
-  //dont know if needed
-
 }
 
 void Simulation::addAction(BaseAction *action){
@@ -186,7 +194,7 @@ void Simulation::step(){
 
 void Simulation::close(){
     for(Plan plan : plans){
-        cout<<plan.toString()<<endl;
+        cout<<plan.toStringClose()<<endl;
     }
     this->isRunning= false;
 }

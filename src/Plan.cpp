@@ -103,3 +103,12 @@ const SelectionPolicy* Plan::getSelectionPolicy() const{
 const Settlement& Plan::getSettlement() const{
     return settlement;
 }
+const string Plan::toStringClose() const{
+    string s;
+    s = "PlanID: " + to_string(plan_id) + "\n" +
+        "SettlementName " + settlement.getName() + "\n" +
+        "LifeQualityScore: " + to_string(life_quality_score) +"\n" +
+        "EconomyScore: " + to_string(economy_score) + "\n" + 
+        "EnvironmentScore: " + to_string(environment_score) + "\n";
+    return s;
+}
