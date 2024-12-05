@@ -16,3 +16,6 @@ SettlementType Settlement::getType() const{
 const string Settlement::toString() const{
     return "settlement "+ getName()+" " + std::to_string(static_cast<int>(type));
 }
+Settlement* Settlement::clone() const{
+    return new Settlement(this->getName(),this->getType());
+}

@@ -6,6 +6,10 @@
 #include "Settlement.h"
 using std::string;
 using std::vector;
+using namespace std;
+#include <functional>
+#include <unordered_map>
+
 
 class BaseAction;
 class SelectionPolicy;
@@ -24,6 +28,13 @@ class Simulation {
         void step();
         void close();
         void open();
+        bool isPlanExists(const int planID);
+        Simulation(const Simulation& other);
+        Simulation& operator=(const Simulation& other);
+        ~Simulation();
+        Simulation(Simulation&& other);
+        Simulation& operator=(Simulation&& other);
+
 
     private:
         bool isRunning;
@@ -32,4 +43,5 @@ class Simulation {
         vector<Plan> plans;
         vector<Settlement*> settlements;
         vector<FacilityType> facilitiesOptions;
+        void clear();
 };
