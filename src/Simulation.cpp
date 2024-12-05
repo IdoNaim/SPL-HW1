@@ -218,7 +218,7 @@ Simulation::Simulation(const Simulation& other): isRunning(false), planCounter(0
         this->actionsLog.push_back(s->clone());
     }
     for(FacilityType s : other.facilitiesOptions){
-        this->facilitiesOptions.push_back(s)
+        this->facilitiesOptions.push_back(s);
     }
     for(Plan s : other.plans){
         this->plans.push_back(Plan(s));

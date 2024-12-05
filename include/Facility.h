@@ -50,6 +50,8 @@ class Facility: public FacilityType {
         const FacilityStatus& getStatus() const;
         const string toString() const;
         const string getStatusString() const;
+        Facility* clone() const;
+
 
     private:
         const string settlementName;
