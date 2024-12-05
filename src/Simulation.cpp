@@ -197,3 +197,21 @@ void Simulation::close(){
 void Simulation::open(){
     this->isRunning =true;
 }
+Simulation::~Simulation(){
+    for(BaseAction* a : this->actionsLog){
+        delete a;
+    }
+    actionsLog.clear();
+    for(Settlement* s : this->settlements){
+        delete s;
+    }
+    settlements.clear();
+    plans.clear();
+    facilitiesOptions.clear();
+}
+Simulation::Simulation(const Simulation& other){
+    
+    for(Settlement* s: other.settlements){
+        this
+    }
+}

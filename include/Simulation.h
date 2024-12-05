@@ -29,7 +29,12 @@ class Simulation {
         void close();
         void open();
         bool isPlanExists(const int planID);
-        vector<string>& split(const string& input);
+        Simulation(const Simulation& other);
+        Simulation& operator=(const Simulation& other);
+        ~Simulation();
+        Simulation(Simulation&& other);
+        Simulation& operator=(Simulation&& other);
+        
 
     private:
         bool isRunning;
