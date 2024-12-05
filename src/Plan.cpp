@@ -87,3 +87,13 @@ using std::vector;
 const int Plan::getId() const{
     return this->plan_id;
 }
+Plan::Plan(const Plan& other):
+plan_id(other.plan_id), settlement(Settlement(other.settlement)), status(other.status), facilities(), underConstruction(), facilityOptions(vector<FacilityType>(other.facilityOptions)), life_quality_score(other.life_quality_score),economy_score(other.economy_score),environment_score(other.environment_score)
+{
+    for(Facility* f : other.facilities){
+        this->facilities.push_back(f.clone());
+    }
+    for(Facility* f : other.underConstruction){
+        this->underConstruction.push_back(f.clone());
+    }
+}

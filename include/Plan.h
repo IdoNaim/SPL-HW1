@@ -24,6 +24,7 @@ class Plan {
         const string toString() const;
         const string planStatusToString() const;
         const int getId() const;
+        Plan(const Plan& other);
 
     private:
         int plan_id;

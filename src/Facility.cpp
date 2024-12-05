@@ -63,3 +63,6 @@ using std::string;
                     return "Not Possible";
                 }
         }
+        Facility* Facility::clone() const{
+            return new Facility(*this);
+        }

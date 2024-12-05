@@ -214,4 +214,13 @@ Simulation::Simulation(const Simulation& other): isRunning(false), planCounter(0
     for(Settlement* s: other.settlements){
         this->settlements.push_back(s->clone());
     }
+    for(BaseAction* s: other.actionsLog){
+        this->actionsLog.push_back(s->clone());
+    }
+    for(FacilityType s : other.facilitiesOptions){
+        this->facilitiesOptions.push_back(s)
+    }
+    for(Plan s : other.plans){
+        this->plans.push_back(Plan(s));
+    }
 }
