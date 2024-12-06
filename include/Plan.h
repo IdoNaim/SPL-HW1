@@ -30,6 +30,9 @@ class Plan {
         const string toStringClose() const;
         ~Plan();
         Plan(Plan && other);
+        int uconstructedLifeQuality() const;
+        int unconstructedEconomy() const;
+        int unconstructedEnvironment() const;
 
 
     private:

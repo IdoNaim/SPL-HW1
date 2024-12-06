@@ -154,3 +154,24 @@ economy_score(other.economy_score), environment_score(other.environment_score){
     other.selectionPolicy = nullptr;
 
 }
+int Plan::uconstructedLifeQuality() const{
+    int ans =0;
+    for(Facility* f :this->underConstruction){
+        ans = ans + f->getLifeQualityScore();
+    }
+    return ans;
+}
+int Plan::unconstructedEconomy() const{
+    int ans =0;
+    for(Facility* f :this->underConstruction){
+        ans = ans + f->getEconomyScore();
+    }
+    return ans;
+}
+int Plan::unconstructedEnvironment() const{
+    int ans =0;
+    for(Facility* f :this->underConstruction){
+        ans = ans + f->getEnvironmentScore();
+    }
+    return ans;
+}
