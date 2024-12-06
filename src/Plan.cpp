@@ -29,7 +29,7 @@ using std::vector;
         }
         void Plan::step() {
             if(status == PlanStatus::AVALIABLE){
-                while (underConstruction.size() < static_cast<int>(settlement.getType())) { //CHANGNe ENUM
+                while (underConstruction.size() < static_cast<int>(settlement.getType())) { 
                     Facility* f = new Facility(selectionPolicy->selectFacility(facilityOptions), settlement.getName());
                     underConstruction.push_back(f);
                 }
@@ -48,7 +48,7 @@ using std::vector;
                 }
             }
 
-            if(underConstruction.size() != static_cast<int>(settlement.getType())+1) //CHANGNe ENUM
+            if(underConstruction.size() != static_cast<int>(settlement.getType())) //CHANGNe ENUM
                 status = PlanStatus::AVALIABLE;
 
         }

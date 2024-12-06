@@ -105,7 +105,7 @@ extern Simulation* backup;
             return as;
         }
         const string AddSettlement::toString() const{
-            return "settlement " + settlementName + " " + to_string(static_cast<int>(settlementType));
+            return "settlement " + settlementName + " " + to_string(static_cast<int>(settlementType)-1);
         }
 
         AddFacility::AddFacility(const string &facilityName, const FacilityCategory facilityCategory, const int price, const int lifeQualityScore, const int economyScore, const int environmentScore)
@@ -135,7 +135,7 @@ extern Simulation* backup;
 
         void PrintPlanStatus::act(Simulation &simulation){
             if(simulation.isPlanExists(planId)){
-                simulation.getPlan(planId).toString(); //add cout
+               cout<< simulation.getPlan(planId).toString()<<endl; //add cout
                 complete();
             }
             else

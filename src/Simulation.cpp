@@ -22,7 +22,7 @@ Simulation::Simulation(const string &configFilePath)
         vector<string> lineArgs = Auxiliary::parseArguments(line);
         if(lineArgs.at(0) != "#"){
             if(lineArgs.at(0) == "settlement"){
-                SettlementType t = static_cast<SettlementType>(stoi(lineArgs.at(2)));
+                SettlementType t = static_cast<SettlementType>(stoi(lineArgs.at(2))+1);
                 this->settlements.push_back( new Settlement(lineArgs.at(1),t));
             }
             else if(lineArgs.at(0) == "facility"){
@@ -88,7 +88,7 @@ void Simulation::start(){
                 cout<< "no settlement type of type "+ arguments.at(2)<<endl;
             }
             else{
-                BaseAction* a = new AddSettlement(arguments.at(1), static_cast<SettlementType>(stoi(arguments.at(2))));
+                BaseAction* a = new AddSettlement(arguments.at(1), static_cast<SettlementType>(stoi(arguments.at(2))+1));
                 a->act(*this);
                 addAction(a);
             }
@@ -189,7 +189,7 @@ Plan & Simulation::getPlan(const int planID){
 }
 
 void Simulation::step(){
-    for(Plan plan : plans){
+    for(Plan& plan : plans){
         plan.step();
     }
 }
