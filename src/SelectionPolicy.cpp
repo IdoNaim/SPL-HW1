@@ -40,7 +40,7 @@ const FacilityType& BalancedSelection::selectFacility(const vector<FacilityType>
         FacilityType option = facilitiesOptions.at(i);
         int lifeQuality =this->getLifeQualityScore() + option.getLifeQualityScore();
         int economy = this->getEconomyScore() + option.getEconomyScore();
-        int environment = this->getEnvironmentScore() + option.getEconomyScore();
+        int environment = this->getEnvironmentScore() + option.getEnvironmentScore();
         int maximum = std::max(lifeQuality,std::max(economy,environment));
         int minimum = std::min(lifeQuality,std::min(economy,environment));
         int distance = maximum - minimum;
@@ -49,6 +49,9 @@ const FacilityType& BalancedSelection::selectFacility(const vector<FacilityType>
             minIndex = i;
         }
     }
+    this->LifeQualityScore = LifeQualityScore +facilitiesOptions[minIndex].getLifeQualityScore();
+    this->EconomyScore = EconomyScore + facilitiesOptions[minIndex].getEconomyScore();
+    this->EnvironmentScore = EnvironmentScore + facilitiesOptions[minIndex].getEnvironmentScore();
     return facilitiesOptions.at(minIndex);
 }
 
@@ -75,12 +78,12 @@ int BalancedSelection::getEnvironmentScore() const{
 
 // ECONOMY SELECTION
 
-EconomySelection::EconomySelection(): lastSelectedIndex(0) {}
+EconomySelection::EconomySelection(): lastSelectedIndex(-1) {}
 
 const FacilityType& EconomySelection::selectFacility(const vector<FacilityType>& facilitiesOptions){
     bool found = false;
     int index =0;
-    for(int i =0; i < facilitiesOptions.size() & !found ; i++){
+    for(int i = lastSelectedIndex+1 ; i != lastSelectedIndex & !found ; i=(i+1)%facilitiesOptions.size()){
         const FacilityType& option = facilitiesOptions.at(i);
         if (option.getCategory() == FacilityCategory::ECONOMY){
             found = true;
@@ -105,12 +108,12 @@ void EconomySelection::setIndex(int index){
 
 //SUSTAINABILITY SELECTION
 
-SustainabilitySelection::SustainabilitySelection(): lastSelectedIndex(0) {}
+SustainabilitySelection::SustainabilitySelection(): lastSelectedIndex(-1) {}
 
 const FacilityType& SustainabilitySelection::selectFacility(const vector<FacilityType>& facilitiesOptions){
     bool found = false;
     int index =0;
-    for(int i =0; i < facilitiesOptions.size() & !found ; i++){
+    for(int i =lastSelectedIndex+1; i !=lastSelectedIndex & !found ; i++){
         const FacilityType& option = facilitiesOptions.at(i);
         if (option.getCategory() == FacilityCategory::ENVIRONMENT){
             found = true;

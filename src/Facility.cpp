@@ -17,7 +17,7 @@ using std::string;
             return environment_score;
         }
         int FacilityType::getEconomyScore() const{
-            return economy_score;
+            return this->economy_score;
         }
         FacilityCategory FacilityType::getCategory() const{
             return category;

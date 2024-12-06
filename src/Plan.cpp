@@ -44,6 +44,9 @@ using std::vector;
                 if (f->getTimeLeft() == 0) {
                     underConstruction.erase(underConstruction.begin() + i);
                     facilities.push_back(f);
+                    this->life_quality_score = life_quality_score +f->getLifeQualityScore();
+                    this->economy_score = economy_score + f->getEconomyScore();
+                    this->environment_score = environment_score + f->getEnvironmentScore();
                     i--;
                 }
             }
@@ -66,8 +69,10 @@ using std::vector;
 
         const string Plan::toString() const{
             string s = "PlanID: " + to_string(plan_id) + "\n" + "SettlementName: " + settlement.getName() + "\n" +
-            string("PlanStatus: ") + planStatusToString() + "Selection Policy: " + selectionPolicy->toString() + "\n" +
-            "LifeQualityScore: " + to_string(life_quality_score) + "\n" + "EconomyScore: " + to_string(economy_score) + "\n" + 
+            string("PlanStatus: ") + planStatusToString() +"\n"+
+            "Selection Policy: " + selectionPolicy->toString() + "\n" +
+            "LifeQualityScore: " + to_string(life_quality_score) + "\n" +
+            "EconomyScore: " + to_string(economy_score) + "\n" + 
             "EnvironmentScore: " + to_string(environment_score) + "\n";
             for(Facility* f : underConstruction)
                 s = s + f->toString();
