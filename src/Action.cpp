@@ -135,7 +135,7 @@ extern Simulation* backup;
 
         void PrintPlanStatus::act(Simulation &simulation){
             if(simulation.isPlanExists(planId)){
-                simulation.getPlan(planId).toString();
+                simulation.getPlan(planId).toString(); //add cout
                 complete();
             }
             else
