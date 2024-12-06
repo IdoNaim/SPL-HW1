@@ -11,7 +11,9 @@ using std::vector;
         Plan::Plan(const int planId, const Settlement &settlement, SelectionPolicy *selectionPolicy, const vector<FacilityType> &facilityOptions)
         : plan_id(planId), settlement(settlement), selectionPolicy(selectionPolicy), facilities(),
          facilityOptions(facilityOptions), status(PlanStatus::AVALIABLE), underConstruction(),
-          life_quality_score(0), economy_score(0), environment_score(0){}
+          life_quality_score(0), economy_score(0), environment_score(0){
+            cout << "created plan" <<endl;
+          }
 
         const int Plan::getlifeQualityScore() const{
             return life_quality_score;
@@ -136,10 +138,10 @@ Plan::~Plan(){
 
 }
 Plan::Plan(Plan&& other)
-:plan_id(other.plan_id), settlement(Settlement(other.settlement)),
+:plan_id(other.plan_id), settlement(other.settlement),
 selectionPolicy(other.selectionPolicy), status(other.status),
 facilities(std::move(other.facilities)), underConstruction(std::move(other.underConstruction)),
-facilityOptions(vector<FacilityType>(other.facilityOptions)), life_quality_score(other.life_quality_score),
+facilityOptions(other.facilityOptions), life_quality_score(other.life_quality_score),
 economy_score(other.economy_score), environment_score(other.environment_score){
     
     other.facilities.clear();
