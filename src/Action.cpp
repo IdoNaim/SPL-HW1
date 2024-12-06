@@ -162,7 +162,9 @@ extern Simulation* backup;
                             simulation.getPlan(planId).setSelectionPolicy(s);
                         }
                         else if(newPolicy == "bal"){
-                            SelectionPolicy* s = new BalancedSelection(simulation.getPlan(planId).getlifeQualityScore(),simulation.getPlan(planId).getEconomyScore(),simulation.getPlan(planId).getEnvironmentScore());
+                            SelectionPolicy* s = new BalancedSelection(simulation.getPlan(planId).getlifeQualityScore()+simulation.getPlan(planId).uconstructedLifeQuality(),
+                            simulation.getPlan(planId).getEconomyScore()+simulation.getPlan(planId).unconstructedEconomy(),
+                            simulation.getPlan(planId).getEnvironmentScore()+simulation.getPlan(planId).unconstructedEnvironment());
                             simulation.getPlan(planId).setSelectionPolicy(s);
                             }
                                 else if(newPolicy == "eco"){
