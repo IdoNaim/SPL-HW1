@@ -45,6 +45,7 @@ class EconomySelection: public SelectionPolicy {
         const string toString() const override;
         EconomySelection *clone() const override;
         ~EconomySelection() override = default;
+        EconomySelection(int index);
     private:
         void setIndex(int index);
         int lastSelectedIndex;

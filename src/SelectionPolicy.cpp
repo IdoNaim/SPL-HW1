@@ -100,11 +100,12 @@ const string EconomySelection::toString() const{
 }
 
 EconomySelection* EconomySelection::clone() const{
-    return new EconomySelection(*this);
+    return new EconomySelection(this->lastSelectedIndex);
 }
 void EconomySelection::setIndex(int index){
     this->lastSelectedIndex = index;
 }
+EconomySelection::EconomySelection(int index): lastSelectedIndex(index){}
 
 //SUSTAINABILITY SELECTION
 

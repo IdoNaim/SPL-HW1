@@ -46,7 +46,7 @@ Simulation::Simulation(const string &configFilePath)
                 }
              //   Settlement t = getSettlement(lineArgs.at(1));
                // Plan p(this->planCounter,t,s,this->facilitiesOptions);
-                this->plans.push_back(Plan(this->planCounter, getSettlement(lineArgs.at(1)),s,this->facilitiesOptions));
+                this->plans.push_back(std::move(Plan(this->planCounter, getSettlement(lineArgs.at(1)),s,this->facilitiesOptions)));
                 this->planCounter++;
             }
         }

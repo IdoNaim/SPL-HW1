@@ -24,6 +24,9 @@ using std::vector;
             return environment_score;
         }
         void Plan::setSelectionPolicy(SelectionPolicy *selectionPolicy){
+            if(this->selectionPolicy != nullptr){
+                delete this->selectionPolicy;
+            }
             this->selectionPolicy = selectionPolicy;
         }
         void Plan::step() {
@@ -94,8 +97,8 @@ const int Plan::getId() const{
     return this->plan_id;
 }
 Plan::Plan(const Plan& other):
-plan_id(other.plan_id), settlement(*other.settlement.clone()), //was settlement(other.settlement)
-selectionPolicy(other.selectionPolicy->clone()), status(other.status),
+plan_id(other.plan_id), settlement(other.settlement), //settlement(*other.settlement.clone()), //was settlement(other.settlement)
+selectionPolicy(other.selectionPolicy->clone()), status(other.status), // was selectionPolicy(other.selectionPolicy->clone())
 facilities(), underConstruction(), facilityOptions(other.facilityOptions),
 life_quality_score(other.life_quality_score),economy_score(other.economy_score),
 environment_score(other.environment_score)
