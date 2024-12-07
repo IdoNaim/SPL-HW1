@@ -1,6 +1,7 @@
 # Please implement your Makefile rules and targets below.
 # Customize this file to define how to build your project.
-all:  link
+all:  link run
+
 
 link: compile
 	g++ -o bin/simulation bin/main.o bin/Facility.o bin/SelectionPolicy.o bin/Settlement.o bin/Simulation.o bin/Auxiliary.o bin/Plan.o bin/Action.o
@@ -18,3 +19,5 @@ compile: clean src/Facility.cpp src/SelectionPolicy.cpp src/Settlement.cpp src/S
 
 clean:
 	rm -rf bin/*
+run:
+	valgrind --leak-check=full --show-reachable=yes ./bin/simulation /workspaces/Skeleton/config_file.txt
