@@ -1,4 +1,3 @@
-#pragma once
 #include <vector>
 #include <iostream>
 #include "../include/Plan.h"
@@ -9,8 +8,9 @@ using namespace std;
 using std::vector;
 
         Plan::Plan(const int planId, const Settlement &settlement, SelectionPolicy *selectionPolicy, const vector<FacilityType> &facilityOptions)
-        : plan_id(planId), settlement(settlement), selectionPolicy(selectionPolicy), facilities(),
-         facilityOptions(facilityOptions), status(PlanStatus::AVALIABLE), underConstruction(),
+        : plan_id(planId), settlement(settlement), selectionPolicy(selectionPolicy),
+            status(PlanStatus::AVALIABLE), facilities(),
+         underConstruction(), facilityOptions(facilityOptions),
           life_quality_score(0), economy_score(0), environment_score(0){
           }
 
@@ -28,7 +28,7 @@ using std::vector;
         }
         void Plan::step() {
             if(status == PlanStatus::AVALIABLE){
-                while (underConstruction.size() < static_cast<int>(settlement.getType())) { 
+                while (static_cast<int>(underConstruction.size()) < static_cast<int>(settlement.getType())) { 
                     Facility* f = new Facility(selectionPolicy->selectFacility(facilityOptions), settlement.getName());
                     underConstruction.push_back(f);
                 }
@@ -36,7 +36,7 @@ using std::vector;
             status = PlanStatus::BUSY;
 
 
-            for (int i = 0; i < underConstruction.size(); i++ ) {
+            for (int i = 0; i < static_cast<int>(underConstruction.size()); i++ ) {
                 Facility* f = underConstruction[i];
                 f->step();
         
@@ -50,7 +50,7 @@ using std::vector;
                 }
             }
 
-            if(underConstruction.size() != static_cast<int>(settlement.getType())) //CHANGNe ENUM
+            if(static_cast<int>(underConstruction.size()) != static_cast<int>(settlement.getType())) //CHANGNe ENUM
                 status = PlanStatus::AVALIABLE;
 
         }
