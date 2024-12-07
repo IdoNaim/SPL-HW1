@@ -207,7 +207,7 @@ void Simulation::open(){
 Simulation::~Simulation(){
     clear();
 }
-Simulation::Simulation(const Simulation& other): isRunning(false), planCounter(0), actionsLog(), plans(), settlements(), facilitiesOptions()
+Simulation::Simulation(const Simulation& other): isRunning(other.isRunning), planCounter(0), actionsLog(), plans(), settlements(), facilitiesOptions()
 {
 
     for(Settlement* s: other.settlements){
@@ -238,7 +238,7 @@ Simulation& Simulation::operator=(const Simulation& other){
             this->settlements.push_back(s->clone());
         }
 
-        for(Plan p: other.plans){
+        for(const Plan& p: other.plans){
             this->plans.push_back(Plan(p));
         }
 
