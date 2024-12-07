@@ -21,8 +21,9 @@ extern Simulation* backup;
             status = ActionStatus::COMPLETED;
         }
         void BaseAction::error(string errorMsg){
+            this->errorMsg = errorMsg;
             status = ActionStatus::ERROR;
-            this->errorMsg = ("Error: " + errorMsg);
+            cout << "Error: " + errorMsg << endl;
         }
         const string& BaseAction::getErrorMsg() const{
             return errorMsg;

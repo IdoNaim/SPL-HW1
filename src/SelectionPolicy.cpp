@@ -113,7 +113,7 @@ SustainabilitySelection::SustainabilitySelection(): lastSelectedIndex(-1) {}
 const FacilityType& SustainabilitySelection::selectFacility(const vector<FacilityType>& facilitiesOptions){
     bool found = false;
     int index =0;
-    for(int i =lastSelectedIndex+1; i !=lastSelectedIndex & !found ; i++){
+    for(int i =lastSelectedIndex+1; i !=lastSelectedIndex & !found ; i=(i+1)%facilitiesOptions.size()){
         const FacilityType& option = facilitiesOptions.at(i);
         if (option.getCategory() == FacilityCategory::ENVIRONMENT){
             found = true;

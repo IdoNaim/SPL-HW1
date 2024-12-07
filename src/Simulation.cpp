@@ -207,7 +207,7 @@ void Simulation::open(){
 Simulation::~Simulation(){
     clear();
 }
-Simulation::Simulation(const Simulation& other): isRunning(other.isRunning), planCounter(0), actionsLog(), plans(), settlements(), facilitiesOptions()
+Simulation::Simulation(const Simulation& other): isRunning(false), planCounter(0), actionsLog(), plans(), settlements(), facilitiesOptions()
 {
 
     for(Settlement* s: other.settlements){
@@ -226,7 +226,6 @@ Simulation::Simulation(const Simulation& other): isRunning(other.isRunning), pla
 }
 Simulation& Simulation::operator=(const Simulation& other){
     if(this != &other){
-        this-> isRunning = other.isRunning;
         this->planCounter = other.planCounter;
         clear();
         
@@ -238,7 +237,7 @@ Simulation& Simulation::operator=(const Simulation& other){
             this->settlements.push_back(s->clone());
         }
 
-        for(const Plan& p: other.plans){
+        for(Plan p: other.plans){
             this->plans.push_back(Plan(p));
         }
 
@@ -255,7 +254,6 @@ Simulation & Simulation::operator=(Simulation&& other){
     if(this != &other){
         clear();
     
-        this->isRunning = other.isRunning;
         this->planCounter = other.planCounter;
         this->actionsLog = std::move(other.actionsLog);
         this->facilitiesOptions = std::move(other.facilitiesOptions);
