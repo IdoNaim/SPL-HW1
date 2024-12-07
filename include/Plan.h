@@ -30,6 +30,8 @@ class Plan {
         const string toStringClose() const;
         ~Plan();
         Plan(Plan && other);
+        Plan& operator=(const Plan& other)=delete;
+        Plan& operator=(Plan&& other)=delete;
         int uconstructedLifeQuality() const;
         int unconstructedEconomy() const;
         int unconstructedEnvironment() const;
